@@ -15,6 +15,12 @@ namespace gitconnect.Model
         }
 
         public string Name { get; set; }
+
         public int StargazerCount { get; set; }
+
+        public override string ToString()
+        {
+            return $"Name: {this.Name}, Stargazer count: {this.StargazerCount}";
+        }
     }
 }
