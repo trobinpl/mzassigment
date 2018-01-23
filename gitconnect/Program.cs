@@ -3,6 +3,9 @@ using gitconnect.Infrastructure.Connector.GitHub.User;
 using gitconnect.Infrastructure.GitHubRepository;
 using gitconnect.Model;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace gitconnect
@@ -29,7 +32,12 @@ namespace gitconnect
             IUserRepository userRepository = new UserRepository(new UserRequest());
             User user = await userRepository.GetUser(username);
             Console.WriteLine(user);
-            
+
+            IEnumerable<Repository> repositories = user.GetRepositoriesSortedBy(r => r.StargazerCount).Take(5);
+            foreach (Repository repository in repositories)
+            {
+                Console.WriteLine(repository);
+            }
         }
     }
 }

@@ -16,13 +16,25 @@ namespace gitconnect.Model
             this.Repositories = repositories;
         }
 
-        public string Username { get; set; }
+        // we don't want anybody to mess with bussines object internal state - it should only change due invoking public methods!
+        public string Username { get; private set; }
 
-        public string Location { get; set; }
+        public string Location { get; private set; }
 
-        public string AvatarUrl { get; set; }
+        public string AvatarUrl { get; private set; }
 
-        public List<Repository> Repositories { get; set; }
+        public List<Repository> Repositories { get; private set; }
+
+        // Let's assume, that this is some complicated bussines logic that it's worth encapsulating it this way (this one obviously is not, but hey - let's show off a little bit ;-) )
+        public IEnumerable<Repository> GetRepositoriesSortedBy(Func<Repository, int> selector)
+        {
+            IEnumerable<Repository> sortedRepositories = this.Repositories.OrderByDescending(selector);
+
+            foreach(Repository repository in sortedRepositories)
+            {
+                yield return repository;
+            }
+        }
 
         public override string ToString()
         {

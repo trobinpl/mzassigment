@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gitconnect.Infrastructure",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gitconnect.Model", "..\gitconnect.Model\gitconnect.Model.csproj", "{7AC2268E-1200-4675-9DFB-9DE1105F1539}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gitconnect.Model.Tests", "gitconnect.Model.Tests\gitconnect.Model.Tests.csproj", "{493AE5B1-B0A4-411A-A248-A081994294D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7AC2268E-1200-4675-9DFB-9DE1105F1539}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AC2268E-1200-4675-9DFB-9DE1105F1539}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AC2268E-1200-4675-9DFB-9DE1105F1539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493AE5B1-B0A4-411A-A248-A081994294D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493AE5B1-B0A4-411A-A248-A081994294D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493AE5B1-B0A4-411A-A248-A081994294D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493AE5B1-B0A4-411A-A248-A081994294D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
