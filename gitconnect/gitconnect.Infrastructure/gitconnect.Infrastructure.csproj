@@ -44,10 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connector\Connector.cs" />
     <Compile Include="Connector\GitHub\Repository\RepositoryResponse.cs" />
-    <Compile Include="Connector\GitHub\User\UserRequest.cs" />
+    <Compile Include="Connector\GitHub\User\UserApiConnector.cs" />
     <Compile Include="Connector\GitHub\User\UserResponse.cs" />
-    <Compile Include="Connector\GitHub\GitHubRequest.cs" />
+    <Compile Include="Connector\GitHub\GitHubApiConnector.cs" />
+    <Compile Include="Connector\Serialization\ISerializationStrategy.cs" />
+    <Compile Include="Connector\Serialization\JSONNetSerializationStrategy.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

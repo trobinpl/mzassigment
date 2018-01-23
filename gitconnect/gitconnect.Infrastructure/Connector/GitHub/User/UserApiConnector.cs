@@ -1,4 +1,5 @@
 ﻿using gitconnect.Infrastructure.Connector.GitHub.Repository;
+using gitconnect.Infrastructure.Connector.Serialization;
 using gitconnect.Infrastructure.Extensions;
 using Newtonsoft.Json;
 using System;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace gitconnect.Infrastructure.Connector.GitHub.User
 {
-    public class UserRequest : GitHubRequest
+    public class UserApiConnector : GitHubApiConnector
     {
-        public UserRequest() : base(new Uri("users/", UriKind.Relative))
+        public UserApiConnector() : base(new Uri("users/", UriKind.Relative))
         {
 
         }
 
-        public UserRequest(string endpointUri) : base(endpointUri) {
+        public UserApiConnector(string endpointUri) : base(endpointUri) {
 
         }
 
@@ -26,7 +27,7 @@ namespace gitconnect.Infrastructure.Connector.GitHub.User
         {
             var completeEndpoint = this.RequestUri.Append(username);
 
-            UserResponse userInfo = await this.Get<UserResponse>(completeEndpoint.ToString());
+            UserResponse userInfo = await this.Get<UserResponse>(completeEndpoint.ToString(), JSONNetSerializationStrategy<UserResponse>.Create());
 
             return userInfo;
         }

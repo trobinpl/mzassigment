@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using gitconnect.Infrastructure.Connector.Serialization;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace gitconnect.Infrastructure.Connector.GitHub
 {
-    public abstract class GitHubRequest
+    public abstract class GitHubApiConnector
     {
         protected Uri ApiUri = new Uri("https://api.github.com/");
         protected Uri EndpointUri;
@@ -23,23 +24,30 @@ namespace gitconnect.Infrastructure.Connector.GitHub
 
         protected HttpClient HttpClient { get; private set; }
 
-        public GitHubRequest()
+        public GitHubApiConnector()
         {
             this.HttpClient = new HttpClient();
             this.HttpClient.DefaultRequestHeaders.Add("User-Agent", "GithubConnect");
         }
 
-        public GitHubRequest(Uri endpointUri) : this()
+        public GitHubApiConnector(Uri endpointUri) : this()
         {
             this.EndpointUri = endpointUri;
         }
 
-        public GitHubRequest(string endpointUri) : this(new Uri(endpointUri, UriKind.Relative))
+        public GitHubApiConnector(string endpointUri) : this(new Uri(endpointUri, UriKind.Relative))
         {
 
         }
 
+        // if I won't specify any serialization strategy, let's assume JSON.Net is my default one
         protected async Task<T> Get<T>(string endpoint)
+        {
+            return await this.Get<T>(endpoint, JSONNetSerializationStrategy<T>.Create());
+        }
+
+        // I do have dependecy in my project on JSON.Net, but who said, that I can't abstract using it, so I could change serializaer without having to modify code, that depends on serialization/deserialiation
+        protected async Task<T> Get<T>(string endpoint, ISerializationStrategy<T> serializationStrategy)
         {
             string responseBody = null;
 
@@ -48,7 +56,8 @@ namespace gitconnect.Infrastructure.Connector.GitHub
             if (response.IsSuccessStatusCode)
             {
                 responseBody = await response.Content.ReadAsStringAsync();
-                T result = JsonConvert.DeserializeObject<T>(responseBody);
+                T result = serializationStrategy.Deserialize(responseBody);
+
                 return result;
             }
 

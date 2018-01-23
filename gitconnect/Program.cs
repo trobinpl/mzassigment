@@ -29,7 +29,7 @@ namespace gitconnect
 
             string username = args[0];
 
-            IUserRepository userRepository = new UserRepository(new UserRequest());
+            IUserRepository userRepository = new UserRepository(new UserApiConnector());
             User user = await userRepository.GetUser(username);
 
             if(user == null)

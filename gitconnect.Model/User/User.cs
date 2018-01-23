@@ -35,7 +35,7 @@ namespace gitconnect.Model
                 yield return repository;
             }
         }
-
+        
         public override string ToString()
         {
             return $"Username: {this.Username}, Location: {this.Location}, AvatarUrl: {this.AvatarUrl}, No. repositories: {this.Repositories.Count}";

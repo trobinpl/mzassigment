@@ -12,9 +12,9 @@ namespace gitconnect.Infrastructure.GitHubRepository
 {
     public class UserRepository : IUserRepository
     {
-        private UserRequest UserRequest;
+        private UserApiConnector UserRequest;
 
-        public UserRepository(UserRequest userRequest)
+        public UserRepository(UserApiConnector userRequest)
         {
             this.UserRequest = userRequest;
         }
