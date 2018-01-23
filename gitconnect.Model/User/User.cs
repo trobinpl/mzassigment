@@ -23,5 +23,10 @@ namespace gitconnect.Model
         public string AvatarUrl { get; set; }
 
         public List<Repository> Repositories { get; set; }
+
+        public override string ToString()
+        {
+            return $"Username: {this.Username}, Location: {this.Location}, AvatarUrl: {this.AvatarUrl}, No. repositories: {this.Repositories.Count}";
+        }
     }
 }
