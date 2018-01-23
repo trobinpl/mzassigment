@@ -28,6 +28,7 @@ namespace gitconnect
 
             IUserRepository userRepository = new UserRepository(new UserRequest());
             User user = await userRepository.GetUser(username);
+            Console.WriteLine(user);
         }
     }
 }
