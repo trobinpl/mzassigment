@@ -9,5 +9,7 @@ namespace gitconnect.Model
     public interface IUserRepository
     {
         Task<User> GetUser(string username);
+
+        Task<List<Repository>> GetRepositoriesBelongingTo(User user);
     }
 }

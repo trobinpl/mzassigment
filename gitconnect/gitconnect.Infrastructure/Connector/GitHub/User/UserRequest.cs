@@ -1,4 +1,5 @@
 ﻿using gitconnect.Infrastructure.Connector.GitHub.Repository;
+using gitconnect.Infrastructure.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,16 +24,17 @@ namespace gitconnect.Infrastructure.Connector.GitHub.User
 
         public async Task<UserResponse> GetUser(string username)
         {
-            var completeEndpoint = new Uri(this.RequestUri, new Uri(username, UriKind.Relative));
+            var completeEndpoint = this.RequestUri.Append(username);
 
             UserResponse userInfo = await this.Get<UserResponse>(completeEndpoint.ToString());
 
             return userInfo;
         }
 
+        // we could just create URI for repositories belonging to specific user - we could use this method when we don't want to retrieve user 
         public async Task<List<RepositoryResponse>> GetUserRepositories(string username)
         {
-            var completeEndpoint = new Uri(this.RequestUri, new Uri($"{username}/repos", UriKind.Relative));
+            var completeEndpoint = this.RequestUri.Append($"{username}/repos");
 
             List<RepositoryResponse> repositoryInfo = await this.Get<List<RepositoryResponse>>(completeEndpoint.ToString());
 
