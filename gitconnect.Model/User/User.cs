@@ -25,7 +25,7 @@ namespace gitconnect.Model
 
         public List<Repository> Repositories { get; private set; }
 
-        // Let's assume, that this is some complicated bussines logic that it's worth encapsulating it this way (this one obviously is not, but hey - let's show off a little bit ;-) )
+        // Let's assume, that this is some complicated bussines logic that it's worth encapsulating it this way
         public IEnumerable<Repository> GetRepositoriesSortedBy(Func<Repository, int> selector)
         {
             IEnumerable<Repository> sortedRepositories = this.Repositories.OrderByDescending(selector);

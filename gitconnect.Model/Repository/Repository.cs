@@ -14,9 +14,9 @@ namespace gitconnect.Model
             this.StargazerCount = stargazerCount;
         }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public int StargazerCount { get; set; }
+        public int StargazerCount { get; private set; }
 
         public override bool Equals(object obj)
         {
