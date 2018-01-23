@@ -31,6 +31,13 @@ namespace gitconnect
 
             IUserRepository userRepository = new UserRepository(new UserRequest());
             User user = await userRepository.GetUser(username);
+
+            if(user == null)
+            {
+                Console.WriteLine($"User \"{username}\" not found");
+                return;
+            }
+
             Console.WriteLine(user);
 
             IEnumerable<Repository> repositories = user.GetRepositoriesSortedBy(r => r.StargazerCount).Take(5);

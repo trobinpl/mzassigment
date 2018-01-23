@@ -48,11 +48,11 @@ namespace gitconnect.Infrastructure.Connector.GitHub
             if (response.IsSuccessStatusCode)
             {
                 responseBody = await response.Content.ReadAsStringAsync();
+                T result = JsonConvert.DeserializeObject<T>(responseBody);
+                return result;
             }
 
-            T result = JsonConvert.DeserializeObject<T>(responseBody);
-
-            return result;
+            return default(T);
         }
     }
 }

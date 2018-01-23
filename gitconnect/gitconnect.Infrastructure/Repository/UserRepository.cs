@@ -21,6 +21,12 @@ namespace gitconnect.Infrastructure.GitHubRepository
         public async Task<User> GetUser(string username)
         {
             UserResponse userResponse = await this.UserRequest.GetUser(username);
+
+            if(userResponse == null)
+            {
+                return null;
+            }
+
             List<RepositoryResponse> repositoryResponse = await this.UserRequest.GetUserRepositories(userResponse);
 
             List<Repository> repositories = new List<Repository>();
