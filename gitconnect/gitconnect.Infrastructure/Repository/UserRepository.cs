@@ -12,23 +12,23 @@ namespace gitconnect.Infrastructure.GitHubRepository
 {
     public class UserRepository : IUserRepository
     {
-        private UserApiConnector UserRequest;
+        private UserApiConnector UserApiConnector;
 
-        public UserRepository(UserApiConnector userRequest)
+        public UserRepository(UserApiConnector userApiConnector)
         {
-            this.UserRequest = userRequest;
+            this.UserApiConnector = userApiConnector;
         }
 
         public async Task<User> GetUser(string username)
         {
-            UserResponse userResponse = await this.UserRequest.GetUser(username);
+            UserResponse userResponse = await this.UserApiConnector.GetUser(username);
 
             if(userResponse == null)
             {
                 return null;
             }
 
-            List<RepositoryResponse> repositoriesResponse = await this.UserRequest.GetUserRepositories(userResponse);
+            List<RepositoryResponse> repositoriesResponse = await this.UserApiConnector.GetUserRepositories(userResponse);
 
             List<Repository> repositories = new List<Repository>();
             repositoriesResponse.ForEach(r => repositories.Add(new Repository(r.Name, r.StargazersCount)));
@@ -40,7 +40,7 @@ namespace gitconnect.Infrastructure.GitHubRepository
         public async Task<List<Repository>> GetRepositoriesBelongingTo(User user)
         {
             List<Repository> repositories = new List<Repository>();
-            List<RepositoryResponse> repositoriesResponse = await this.UserRequest.GetUserRepositories(user.Username);
+            List<RepositoryResponse> repositoriesResponse = await this.UserApiConnector.GetUserRepositories(user.Username);
             repositoriesResponse.ForEach(r => repositories.Add(new Repository(r.Name, r.StargazersCount)));
 
             return repositories;

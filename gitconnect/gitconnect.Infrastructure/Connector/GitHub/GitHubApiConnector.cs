@@ -43,10 +43,10 @@ namespace gitconnect.Infrastructure.Connector.GitHub
         // if I won't specify any serialization strategy, let's assume JSON.Net is my default one
         protected async Task<T> Get<T>(string endpoint)
         {
-            return await this.Get<T>(endpoint, JSONNetSerializationStrategy<T>.Create());
+            return await this.Get<T>(endpoint, new JSONNetSerializationStrategy<T>());
         }
 
-        // I do have dependecy in my project on JSON.Net, but who said, that I can't abstract using it, so I could change serializaer without having to modify code, that depends on serialization/deserialiation
+        // I do have dependecy in my project on JSON.Net, but who said, that I can't abstract using it, so I could change serializer without having to modify code, that depends on serialization/deserialiation
         protected async Task<T> Get<T>(string endpoint, ISerializationStrategy<T> serializationStrategy)
         {
             string responseBody = null;
