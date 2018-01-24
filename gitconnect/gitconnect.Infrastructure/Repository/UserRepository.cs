@@ -41,6 +41,12 @@ namespace gitconnect.Infrastructure.GitHubRepository
         {
             List<Repository> repositories = new List<Repository>();
             List<RepositoryResponse> repositoriesResponse = await this.UserApiConnector.GetUserRepositories(user.Username);
+
+            if(repositoriesResponse == null)
+            {
+                return null;
+            }
+
             repositoriesResponse.ForEach(r => repositories.Add(new Repository(r.Name, r.StargazersCount)));
 
             return repositories;

@@ -27,7 +27,7 @@ namespace gitconnect.Infrastructure.Connector.GitHub.User
         {
             var completeEndpoint = this.RequestUri.Append(username);
 
-            UserResponse userInfo = await this.Get<UserResponse>(completeEndpoint.ToString(), JSONNetSerializationStrategy<UserResponse>.Create());
+            UserResponse userInfo = await this.Get<UserResponse>(completeEndpoint.ToString(), new JSONNetSerializationStrategy<UserResponse>());
 
             return userInfo;
         }
