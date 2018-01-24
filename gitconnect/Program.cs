@@ -15,8 +15,6 @@ namespace gitconnect
         public static void Main(string[] args)
         {
             Run(args).GetAwaiter().GetResult();
-
-            Console.ReadLine();
         }
 
         static async Task Run(string[] args)
